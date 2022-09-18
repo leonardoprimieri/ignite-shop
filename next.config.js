@@ -8,6 +8,10 @@ const nextConfig = {
       allowFutureImages: true,
     },
   },
+
+  images: {
+    domains: ["files.stripe.com"],
+  },
 };
 
 module.exports = nextConfig;
