@@ -1,4 +1,4 @@
-import { globalCss } from ".";
+import { globalCss } from "./theme";
 
 export const globalStyles = globalCss({
   "*": {

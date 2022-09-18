@@ -2,6 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-}
 
-module.exports = nextConfig
+  experimental: {
+    images: {
+      allowFutureImages: true,
+    },
+  },
+};
+
+module.exports = nextConfig;
