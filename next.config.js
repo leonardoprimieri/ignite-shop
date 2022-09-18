@@ -5,13 +5,13 @@ const nextConfig = {
 
   experimental: {
     images: {
-      allowFutureImages: true,
-    },
+      allowFutureImages: true
+    }
   },
 
   images: {
-    domains: ["files.stripe.com"],
-  },
-};
+    domains: ["files.stripe.com"]
+  }
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
