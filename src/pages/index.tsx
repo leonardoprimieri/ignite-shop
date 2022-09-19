@@ -9,7 +9,6 @@ import { stripeApi } from "../lib/stripe"
 import { ProductModel } from "../models/product-model"
 import { GetStaticProps } from "next"
 import formatToCurrency from "../helpers/format-to-currency"
-import Link from "next/link"
 import ProductCard from "../components/product-card/product-card"
 
 type Props = {
@@ -27,9 +26,7 @@ export default function Home({ products }: Props) {
   return (
     <HomeContainer ref={sliderRef} className='keen-slider'>
       {products.map((product) => (
-        <Link href={`product/${product.id}`} key={product.id}>
-          <ProductCard product={product} />
-        </Link>
+        <ProductCard key={product.id} product={product} />
       ))}
     </HomeContainer>
   )
@@ -47,7 +44,6 @@ export const getStaticProps: GetStaticProps = async () => {
       id: product.id,
       name: product.name,
       imageUrl: product.images[0],
-      description: product.description,
       url: product.url,
       price: formatToCurrency(productPrice.unit_amount / 100)
     }
