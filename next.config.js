@@ -10,7 +10,7 @@ const nextConfig = {
   },
 
   images: {
-    domains: ["files.stripe.com", "source.unsplash.com"]
+    domains: ["files.stripe.com"]
   }
 }
 
