@@ -12,6 +12,7 @@ import {
   ProductPageContainer
 } from "../../styles/pages/product-page-styles"
 import axios from "axios"
+import { useState } from "react"
 
 type Props = {
   product: ProductModel
@@ -19,9 +20,11 @@ type Props = {
 
 export default function ProductPage({ product }: Props) {
   const { isFallback } = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleBuyProduct = async () => {
     try {
+      setIsLoading(true)
       const response = await axios.post("/api/checkout", {
         productPriceId: product.defaultPriceId
       })
@@ -31,6 +34,8 @@ export default function ProductPage({ product }: Props) {
       window.location.href = checkoutUrl
     } catch (error) {
       alert("Falha ao redirecionar ao checkout")
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -55,7 +60,9 @@ export default function ProductPage({ product }: Props) {
 
         <p>{product.description}</p>
 
-        <PayButton onClick={handleBuyProduct}>Compre aqui</PayButton>
+        <PayButton onClick={handleBuyProduct}>
+          {isLoading ? "Carregando" : "Compre aqui"}
+        </PayButton>
       </ProductInfoContainer>
     </ProductPageContainer>
   )
