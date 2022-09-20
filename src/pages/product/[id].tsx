@@ -11,6 +11,7 @@ import {
   ProductInfoContainer,
   ProductPageContainer
 } from "../../styles/pages/product-page-styles"
+import axios from "axios"
 
 type Props = {
   product: ProductModel
@@ -18,6 +19,20 @@ type Props = {
 
 export default function ProductPage({ product }: Props) {
   const { isFallback } = useRouter()
+
+  const handleBuyProduct = async () => {
+    try {
+      const response = await axios.post("/api/checkout", {
+        productPriceId: product.defaultPriceId
+      })
+
+      const { checkoutUrl } = response.data
+
+      window.location.href = checkoutUrl
+    } catch (error) {
+      alert("Falha ao redirecionar ao checkout")
+    }
+  }
 
   if (isFallback) {
     return <p>Carregando...</p>
@@ -40,7 +55,7 @@ export default function ProductPage({ product }: Props) {
 
         <p>{product.description}</p>
 
-        <PayButton>Compre aqui</PayButton>
+        <PayButton onClick={handleBuyProduct}>Compre aqui</PayButton>
       </ProductInfoContainer>
     </ProductPageContainer>
   )
@@ -71,13 +86,14 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
     imageUrl: product.images[0],
     description: product.description,
     url: product.url,
-    price: formatToCurrency(productPrice.unit_amount / 100)
+    price: formatToCurrency(productPrice.unit_amount / 100),
+    defaultPriceId: productPrice.id
   }
 
   return {
     props: {
       product: formattedProduct
     },
-    revalidate: 60 * 60 * 1 // 1 hours,
+    revalidate: 60 * 60 * 1 // 1 hour,
   }
 }

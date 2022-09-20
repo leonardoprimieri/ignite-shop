@@ -1,4 +1,5 @@
 export type ProductModel = {
+  defaultPriceId: string
   id: string
   name: string
   imageUrl: string
