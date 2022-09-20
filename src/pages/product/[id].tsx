@@ -13,6 +13,7 @@ import {
 } from "../../styles/pages/product-page-styles"
 import axios from "axios"
 import { useState } from "react"
+import Head from "next/head"
 
 type Props = {
   product: ProductModel
@@ -44,27 +45,32 @@ export default function ProductPage({ product }: Props) {
   }
 
   return (
-    <ProductPageContainer>
-      <ProductImageContainer>
-        <Image
-          src={product.imageUrl}
-          alt={product.name}
-          width={520}
-          height={480}
-        />
-      </ProductImageContainer>
+    <>
+      <Head>
+        <title>{product.name}</title>
+      </Head>
+      <ProductPageContainer>
+        <ProductImageContainer>
+          <Image
+            src={product.imageUrl}
+            alt={product.name}
+            width={520}
+            height={480}
+          />
+        </ProductImageContainer>
 
-      <ProductInfoContainer>
-        <h1>{product.name}</h1>
-        <span>{product.price}</span>
+        <ProductInfoContainer>
+          <h1>{product.name}</h1>
+          <span>{product.price}</span>
 
-        <p>{product.description}</p>
+          <p>{product.description}</p>
 
-        <PayButton onClick={handleBuyProduct}>
-          {isLoading ? "Carregando" : "Compre aqui"}
-        </PayButton>
-      </ProductInfoContainer>
-    </ProductPageContainer>
+          <PayButton onClick={handleBuyProduct}>
+            {isLoading ? "Carregando" : "Compre aqui"}
+          </PayButton>
+        </ProductInfoContainer>
+      </ProductPageContainer>
+    </>
   )
 }
 

@@ -10,6 +10,7 @@ import { ProductModel } from "../models/product-model"
 import { GetStaticProps } from "next"
 import formatToCurrency from "../helpers/format-to-currency"
 import ProductCard from "../components/product-card/product-card"
+import Head from "next/head"
 
 type Props = {
   products: ProductModel[]
@@ -24,11 +25,16 @@ export default function Home({ products }: Props) {
   })
 
   return (
-    <HomeContainer ref={sliderRef} className='keen-slider'>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </HomeContainer>
+    <>
+      <Head>
+        <title>Ignite Shop </title>
+      </Head>
+      <HomeContainer ref={sliderRef} className='keen-slider'>
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </HomeContainer>
+    </>
   )
 }
 

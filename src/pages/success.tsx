@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next"
 import Image from "next/future/image"
+import Head from "next/head"
 import Link from "next/link"
 import Stripe from "stripe"
 import { stripeApi } from "../lib/stripe"
@@ -18,18 +19,23 @@ type Props = {
 
 export default function SuccessPage({ customerName, product }: Props) {
   return (
-    <SuccessPageContainer>
-      <h1>Compra efetuada!</h1>
-      <SuccessProductContainer>
-        <Image src={product.imageUrl} alt='' width={200} height={200} />
-      </SuccessProductContainer>
-      <p>
-        Uhuul <strong>{customerName}</strong>, sua{" "}
-        <strong>{product.name}</strong> já está a caminho da sua casa.
-      </p>
+    <>
+      <Head>
+        <title>Success | Next.js Ecommerce</title>
+      </Head>
+      <SuccessPageContainer>
+        <h1>Compra efetuada!</h1>
+        <SuccessProductContainer>
+          <Image src={product.imageUrl} alt='' width={200} height={200} />
+        </SuccessProductContainer>
+        <p>
+          Uhuul <strong>{customerName}</strong>, sua{" "}
+          <strong>{product.name}</strong> já está a caminho da sua casa.
+        </p>
 
-      <Link href='/'>Voltar ao catálogo</Link>
-    </SuccessPageContainer>
+        <Link href='/'>Voltar ao catálogo</Link>
+      </SuccessPageContainer>
+    </>
   )
 }
 
