@@ -21,7 +21,9 @@ export default function SuccessPage({ customerName, product }: Props) {
   return (
     <>
       <Head>
-        <title>Success | Next.js Ecommerce</title>
+        <title>Compra efetuada com sucesso!</title>
+
+        <meta name='robots' content='noindex' />
       </Head>
       <SuccessPageContainer>
         <h1>Compra efetuada!</h1>
